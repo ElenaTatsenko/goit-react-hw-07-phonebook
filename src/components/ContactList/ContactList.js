@@ -1,7 +1,7 @@
 import React from 'react';
 import css from '../ContactList/ContactList.module.css'
 import { useDispatch, useSelector } from "react-redux"; 
-import { deleteContact } from '../../redux/contactsSlice';
+import { deleteContact } from 'redux/operations';
 import { nanoid } from 'nanoid';
 
 
