@@ -28,7 +28,8 @@ export const contactsSlice = createSlice({
         [addContact.fulfilled](state, action) {
             state.isLoading = false;
             state.error = null;
-            state.contacts.find(
+            
+            state.items.find(
                 contact =>
                     action.payload.name.toLowerCase() === contact.name.toLowerCase()) ?
                 alert(`${action.payload.name} is already in contacts.`)

@@ -28,7 +28,8 @@ export default function ContactForm() {
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(addContact({ name, number }))
+    
+    dispatch(addContact({ name, number }));
     reset()
     }
 

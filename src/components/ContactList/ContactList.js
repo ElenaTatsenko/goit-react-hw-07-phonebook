@@ -8,10 +8,12 @@ import { nanoid } from 'nanoid';
 
 const ContactList = () => {
     const dispatch = useDispatch();
-    const {contacts} = useSelector(state => state.contacts);
+    const contacts = useSelector(state => state.contacts.items);
     const filter = useSelector(state => state.filter);
    
     const onDeleteContact = id => dispatch(deleteContact(id));
+    
+  
 
     const getFilterContacts = () => {
         if (!filter) {
@@ -27,7 +29,7 @@ const ContactList = () => {
             return (<li key={nanoid()} className={css.contactListItem}>
                 <p className={css.contactListEl}><span className={css.contactListSpan}>Name:</span> {name}</p>
                 <p className={css.contactListEl}> <span className={css.contactListSpan}>Number:</span> {number}</p>
-                <button className={css.contactListDelBtn} onClick={() => onDeleteContact({ id })}  type="button">Remove</button>
+                <button className={css.contactListDelBtn} onClick={() => onDeleteContact( id )}  type="button">Remove</button>
             </li>)
         }
             
