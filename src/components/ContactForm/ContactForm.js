@@ -3,12 +3,14 @@ import { nanoid } from 'nanoid';
 import css from '../ContactForm/ContactForm.module.css'
 import { useDispatch } from "react-redux"; 
 import { addContact } from 'redux/operations';
+import { useSelector } from 'react-redux';
 
 
 export default function ContactForm() {
 
   const dispatch = useDispatch();
   
+  const contacts = useSelector(state => state.contacts.items);
 
   const [name, setName] = useState('')
   const [number, setNumber] = useState('')
@@ -29,7 +31,12 @@ export default function ContactForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     
+    contacts.find(
+      contact => name.toLowerCase() === contact.name.toLowerCase()
+    )
+      ? alert(`${name} is already in contacts.`):
     dispatch(addContact({ name, number }));
+    
     reset()
     }
 

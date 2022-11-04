@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { nanoid } from 'nanoid';
 import { fetchContacts, addContact, deleteContact } from "./operations";
 
 
@@ -26,16 +25,11 @@ export const contactsSlice = createSlice({
         [addContact.fulfilled](state, action) {
             state.isLoading = false;
             state.error = null;
-            
-            state.items.find(
-                contact =>
-                    action.payload.name.toLowerCase() === contact.name.toLowerCase()) ?
-                alert(`${action.payload.name} is already in contacts.`)
-                : state.items.push({
-                    id: nanoid(),
-                    name: action.payload.name,
-                    number: action.payload.number,
-                })
+            state.items.push({
+                id: action.payload.id,
+                name: action.payload.name,
+                number: action.payload.number,
+            })
         },
         [addContact.pending](state) {
             state.isLoading = true;
@@ -48,6 +42,7 @@ export const contactsSlice = createSlice({
             state.isLoading = false;
             state.error = null;
             state.items = state.items.filter(item => item.id !== action.payload.id);
+            //console.log(action.payload)
         },
         [deleteContact.pending](state) {
             state.isLoading = true;

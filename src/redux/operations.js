@@ -39,7 +39,8 @@ export const deleteContact = createAsyncThunk('contacts/deleteContact', async (c
         return response.data;
     }
     catch (error) {
-      return rejectWithValue(error.message);
+        rejectWithValue(error.message);
+       
     }
   }
 );
