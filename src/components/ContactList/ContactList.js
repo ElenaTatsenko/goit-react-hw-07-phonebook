@@ -3,6 +3,7 @@ import css from '../ContactList/ContactList.module.css'
 import { useDispatch, useSelector } from "react-redux"; 
 import { deleteContact } from 'redux/operations';
 import { nanoid } from 'nanoid';
+import Loader from 'components/Loader/Loader';
 
 
 
@@ -10,6 +11,7 @@ const ContactList = () => {
     const dispatch = useDispatch();
     const contacts = useSelector(state => state.contacts.items);
     const filter = useSelector(state => state.filter);
+    const isLoading = useSelector(state => state.contacts.isLoading);
    
     const onDeleteContact = id => dispatch(deleteContact(id));
     
@@ -25,7 +27,8 @@ const ContactList = () => {
     };
     
     return (
-        <ul className={css.contactList}>{getFilterContacts().map(({ name, number, id }) => {
+       
+        <ul className={css.contactList}> {isLoading && <Loader />}{getFilterContacts().map(({ name, number, id }) => {
             return (<li key={nanoid()} className={css.contactListItem}>
                 <p className={css.contactListEl}><span className={css.contactListSpan}>Name:</span> {name}</p>
                 <p className={css.contactListEl}> <span className={css.contactListSpan}>Number:</span> {number}</p>
